@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
 RUN apt-get update && apt-get install -y \
     libzip-dev \
@@ -17,10 +17,6 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html/storage \
     && chown -R www-data:www-data /var/www/html/bootstrap/cache
 
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+EXPOSE 8000
 
-RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
-
-RUN a2dismod mpm_event && a2enmod mpm_prefork rewrite
-
-EXPOSE 80
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
