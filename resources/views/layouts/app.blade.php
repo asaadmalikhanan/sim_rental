@@ -11,17 +11,12 @@
     </head>
     <body class="font-sans antialiased" style="background:#f0f2f5;">
 
-        <div class="flex min-h-screen" x-data="{ sidebarOpen: window.innerWidth >= 768 }" @resize.window="sidebarOpen = window.innerWidth >= 768">
-
-            <!-- Overlay Mobile -->
-            <div x-show="sidebarOpen && window.innerWidth < 768"
-                 @click="sidebarOpen = false"
-                 class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"></div>
+        <div class="flex min-h-screen" x-data="{ sidebarOpen: true }">
 
             <!-- Sidebar -->
-            <aside :class="sidebarOpen ? 'w-64 translate-x-0' : '-translate-x-full md:translate-x-0 md:w-16'"
-                   class="sidebar sidebar-transition min-h-screen flex flex-col flex-shrink-0 fixed md:relative z-50"
-                   style="transition: all 0.3s ease;">
+            <aside :class="sidebarOpen ? 'w-64' : 'w-16'"
+                   class="sidebar sidebar-transition min-h-screen flex flex-col flex-shrink-0"
+                   style="transition: width 0.3s ease;">
 
                 <!-- Logo -->
                 <div class="sidebar-header flex items-center gap-3 px-4 py-4">
@@ -114,7 +109,7 @@
             </aside>
 
             <!-- Main Content -->
-            <div class="flex-1 flex flex-col min-w-0 w-full">
+            <div class="flex-1 flex flex-col min-w-0">
 
                 <!-- Topbar -->
                 <header class="topbar fade-in" style="position:sticky; top:0; z-index:10;">
@@ -167,7 +162,7 @@
                 </header>
 
                 <!-- Page Content -->
-                <main class="flex-1 p-4 md:p-6 page-enter">
+                <main class="flex-1 p-6 page-enter">
                     {{ $slot }}
                 </main>
 
