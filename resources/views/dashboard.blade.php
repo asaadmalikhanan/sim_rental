@@ -1,122 +1,110 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Dashboard
-        </h2>
-    </x-slot>
+    <x-slot name="header">Dashboard</x-slot>
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="space-y-6">
 
-            {{-- Banner Selamat Datang --}}
-            <div class="rounded-2xl overflow-hidden shadow-sm" style="background:linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); min-height:160px;">
-                <div class="flex items-center gap-8" style="min-height:160px; padding-left:3rem; padding-right:3rem;">
+        {{-- Stats Cards --}}
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 
-                    {{-- Logo dengan background putih --}}
-<div style="flex-shrink:0; background:#fff; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; padding:6px;">
-    <img src="/images/logocvMAS.png" alt="Logo CV MAS"
-         style="width:100px; height:100px; object-fit:contain;">
-</div>
-
-                    {{-- Garis --}}
-                    <div style="width:1px; height:90px; background:rgba(255,255,255,0.2); flex-shrink:0;"></div>
-
-                    {{-- Teks --}}
-                    <div>
-                        <p style="color:rgba(255,255,255,0.6); font-size:11px; text-transform:uppercase; letter-spacing:2px; margin-bottom:6px;">Selamat Datang</p>
-                        <h1 style="color:#fff; font-size:26px; font-weight:700; margin-bottom:8px;">CV. Mitra Agata Selaras</h1>
-                        <p style="color:rgba(255,255,255,0.75); font-size:13px; line-height:1.6;">
-                            Penyedia jasa rental kendaraan terpercaya dengan berbagai pilihan armada untuk kebutuhan pribadi, operasional, dan pekerjaan.
-                        </p>
-                    </div>
-
-                </div>
+            <div class="bg-white rounded-xl p-5 shadow-sm border-l-4" style="border-left-color:#1e3a5f;">
+                <p class="text-xs text-gray-500 uppercase tracking-wide">Total Mobil</p>
+                <p class="text-3xl font-bold text-gray-800 mt-1">{{ $totalMobil }}</p>
+                <p class="text-xs text-gray-400 mt-1">Unit terdaftar</p>
             </div>
 
-            {{-- Info Rental --}}
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-white rounded-xl shadow-sm p-5 flex items-start gap-4 border-l-4" style="border-left-color:#1e3a5f;">
-                    <div class="text-3xl">🕐</div>
-                    <div>
-                        <p class="font-semibold text-gray-800 mb-1">Jam Operasional</p>
-                        <p class="text-sm text-gray-500">Senin - Sabtu</p>
-                        <p class="text-sm text-gray-500">08.00 - 17.00 WIB</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-sm p-5 flex items-start gap-4 border-l-4" style="border-left-color:#2d6a9f;">
-                    <div class="text-3xl">📍</div>
-                    <div>
-                        <p class="font-semibold text-gray-800 mb-1">Lokasi</p>
-                        <p class="text-sm text-gray-500">Pekanbaru, Riau</p>
-                        <p class="text-sm text-gray-500">Melayani area sekitarnya</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-sm p-5 flex items-start gap-4 border-l-4" style="border-left-color:#3a86c8;">
-                    <div class="text-3xl">📋</div>
-                    <div>
-                        <p class="font-semibold text-gray-800 mb-1">Syarat Sewa</p>
-                        <p class="text-sm text-gray-500">KTP & SIM aktif</p>
-                        <p class="text-sm text-gray-500">DP sesuai ketentuan</p>
-                    </div>
-                </div>
+            <div class="bg-white rounded-xl p-5 shadow-sm border-l-4" style="border-left-color:#16a34a;">
+                <p class="text-xs text-gray-500 uppercase tracking-wide">Mobil Tersedia</p>
+                <p class="text-3xl font-bold text-green-600 mt-1">{{ $mobilTersedia }}</p>
+                <p class="text-xs text-gray-400 mt-1">Siap disewa</p>
             </div>
 
-            {{-- Armada Kami --}}
-            <div>
-                <h2 class="text-lg font-semibold text-gray-700 mb-3">🚗 Armada Kami</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="bg-white rounded-xl p-5 shadow-sm border-l-4" style="border-left-color:#dc2626;">
+                <p class="text-xs text-gray-500 uppercase tracking-wide">Mobil Disewa</p>
+                <p class="text-3xl font-bold text-red-600 mt-1">{{ $mobilDisewa }}</p>
+                <p class="text-xs text-gray-400 mt-1">Sedang digunakan</p>
+            </div>
 
-                    <div class="bg-white rounded-xl overflow-hidden border hover:shadow-lg transition">
-                        <img src="/images/avanza.png" alt="Avanza" class="w-full h-40 object-cover">
-                        <div class="p-3">
-                            <p class="font-semibold text-gray-800">Toyota Avanza</p>
-                            <p class="text-sm text-gray-500">Mobil Penumpang</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl overflow-hidden border hover:shadow-lg transition">
-                        <img src="/images/fortuner.png" alt="Fortuner" class="w-full h-40 object-cover">
-                        <div class="p-3">
-                            <p class="font-semibold text-gray-800">Toyota Fortuner</p>
-                            <p class="text-sm text-gray-500">SUV</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl overflow-hidden border hover:shadow-lg transition">
-                        <img src="/images/pajero.png" alt="Pajero" class="w-full h-40 object-cover">
-                        <div class="p-3">
-                            <p class="font-semibold text-gray-800">Mitsubishi Pajero</p>
-                            <p class="text-sm text-gray-500">SUV</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl overflow-hidden border hover:shadow-lg transition">
-                        <img src="/images/triton.png" alt="Triton" class="w-full h-40 object-cover">
-                        <div class="p-3">
-                            <p class="font-semibold text-gray-800">Mitsubishi Triton</p>
-                            <p class="text-sm text-gray-500">Pickup</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl overflow-hidden border hover:shadow-lg transition">
-                        <img src="/images/truck.png" alt="Truck" class="w-full h-40 object-cover">
-                        <div class="p-3">
-                            <p class="font-semibold text-gray-800">Truck</p>
-                            <p class="text-sm text-gray-500">Truck</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl overflow-hidden border hover:shadow-lg transition">
-                        <img src="/images/bus.png" alt="Bus" class="w-full h-40 object-cover">
-                        <div class="p-3">
-                            <p class="font-semibold text-gray-800">Bus</p>
-                            <p class="text-sm text-gray-500">Minibus</p>
-                        </div>
-                    </div>
-
-                </div>
+            <div class="bg-white rounded-xl p-5 shadow-sm border-l-4" style="border-left-color:#2d6a9f;">
+                <p class="text-xs text-gray-500 uppercase tracking-wide">Total Pelanggan</p>
+                <p class="text-3xl font-bold text-gray-800 mt-1">{{ $totalPelanggan }}</p>
+                <p class="text-xs text-gray-400 mt-1">Pelanggan terdaftar</p>
             </div>
 
         </div>
+
+        {{-- Total Transaksi --}}
+        <div class="bg-white rounded-xl p-5 shadow-sm">
+            <p class="text-xs text-gray-500 uppercase tracking-wide">Total Transaksi</p>
+            <p class="text-3xl font-bold text-gray-800 mt-1">{{ $totalTransaksi }}</p>
+            <p class="text-xs text-gray-400 mt-1">Semua transaksi rental</p>
+        </div>
+
+        {{-- Grafik Pendapatan Bulanan --}}
+        <div class="bg-white rounded-xl p-5 shadow-sm">
+            <h3 class="font-semibold text-gray-700 mb-4">📈 Pendapatan Bulanan {{ date('Y') }}</h3>
+            <canvas id="grafikPendapatan" height="100"></canvas>
+        </div>
+
+        {{-- Transaksi Terbaru --}}
+        <div class="bg-white rounded-xl p-5 shadow-sm">
+            <h3 class="font-semibold text-gray-700 mb-4">🧾 Transaksi Terbaru</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="text-left text-gray-500 border-b">
+                            <th class="pb-2">Pelanggan</th>
+                            <th class="pb-2">Mobil</th>
+                            <th class="pb-2">Tanggal</th>
+                            <th class="pb-2">Total</th>
+                            <th class="pb-2">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($transaksiTerbaru as $t)
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-2">{{ $t->pelanggan->nama ?? '-' }}</td>
+                            <td class="py-2">{{ $t->mobil->nama_mobil ?? '-' }}</td>
+                            <td class="py-2">{{ \Carbon\Carbon::parse($t->tanggal_mulai)->format('d/m/Y') }}</td>
+                            <td class="py-2">Rp {{ number_format($t->total_biaya, 0, ',', '.') }}</td>
+                            <td class="py-2">
+                                <span class="px-2 py-1 rounded-full text-xs
+                                    {{ $t->status == 'aktif' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600' }}">
+                                    {{ ucfirst($t->status) }}
+                                </span>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr><td colspan="5" class="py-4 text-center text-gray-400">Belum ada transaksi</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('grafikPendapatan').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($labelBulan) !!},
+                datasets: [{
+                    label: 'Pendapatan (Rp)',
+                    data: {!! json_encode($dataPendapatan) !!},
+                    backgroundColor: '#2d6a9f',
+                    borderRadius: 6,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { ticks: { callback: v => 'Rp ' + v.toLocaleString('id-ID') } }
+                }
+            }
+        });
+    </script>
+
 </x-app-layout>
