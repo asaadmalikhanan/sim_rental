@@ -27,10 +27,22 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="block text-sm font-medium mb-1">Merk</label>
-                        <input type="text" name="merk" value="{{ old('merk') }}"
-                               class="w-full border rounded px-3 py-2" required>
-                    </div>
+    <label class="block text-sm font-medium mb-1">Merk</label>
+    <select name="merk" class="w-full border rounded px-3 py-2" required>
+        <option value="">-- Pilih Merk --</option>
+        <option value="Toyota" {{ old('merk') == 'Toyota' ? 'selected' : '' }}>Toyota</option>
+        <option value="Mitsubishi" {{ old('merk') == 'Mitsubishi' ? 'selected' : '' }}>Mitsubishi</option>
+        <option value="Honda" {{ old('merk') == 'Honda' ? 'selected' : '' }}>Honda</option>
+        <option value="Suzuki" {{ old('merk') == 'Suzuki' ? 'selected' : '' }}>Suzuki</option>
+        <option value="Daihatsu" {{ old('merk') == 'Daihatsu' ? 'selected' : '' }}>Daihatsu</option>
+        <option value="Isuzu" {{ old('merk') == 'Isuzu' ? 'selected' : '' }}>Isuzu</option>
+        <option value="Hino" {{ old('merk') == 'Hino' ? 'selected' : '' }}>Hino</option>
+        <option value="Nissan" {{ old('merk') == 'Nissan' ? 'selected' : '' }}>Nissan</option>
+        <option value="Mazda" {{ old('merk') == 'Mazda' ? 'selected' : '' }}>Mazda</option>
+        <option value="Hyundai" {{ old('merk') == 'Hyundai' ? 'selected' : '' }}>Hyundai</option>
+        <option value="Wuling" {{ old('merk') == 'Wuling' ? 'selected' : '' }}>Wuling</option>
+    </select>
+</div>
 
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-1">Nomor Plat</label>
