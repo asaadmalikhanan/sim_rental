@@ -26,13 +26,13 @@
                     {{-- Tombol Filter Merk --}}
                     <a href="{{ route('mobil.index') }}"
                        class="px-4 py-2 rounded text-sm font-medium transition
-                       {{ !request('merk') ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
-                        Semua
+                       {{ !request('merk') ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
+        Semua
                     </a>
                     @foreach(['Toyota','Mitsubishi','Honda','Suzuki','Daihatsu','Isuzu','Hino','Nissan','Mazda','Hyundai','Wuling'] as $merk)
                     <a href="{{ route('mobil.index', ['merk' => $merk]) }}"
                        class="px-4 py-2 rounded text-sm font-medium transition
-                       {{ request('merk') == $merk ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
+                       {{ request('merk') == $merk ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
                         {{ $merk }}
                     </a>
                     @endforeach
