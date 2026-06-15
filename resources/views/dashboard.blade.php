@@ -62,7 +62,7 @@
                     <tbody>
                         @forelse($transaksiTerbaru as $t)
                         <tr class="border-b hover:bg-gray-50">
-                            <td class="py-2">{{ $t->pelanggan->nama ?? '-' }}</td>
+                            <td class="py-2">{{ $t->pelanggan->nama_pelanggan ?? '-' }}</td>
                             <td class="py-2">{{ $t->mobil->nama_mobil ?? '-' }}</td>
                             <td class="py-2">{{ \Carbon\Carbon::parse($t->tanggal_mulai)->format('d/m/Y') }}</td>
                             <td class="py-2">Rp {{ number_format($t->total_biaya, 0, ',', '.') }}</td>
