@@ -115,7 +115,7 @@
             <tr>
                 <td>{{ $i + 1 }}</td>
                 <td>{{ $transaksi->kode_transaksi }}</td>
-                <td>{{ $transaksi->pelanggan->nama ?? '-' }}</td>
+                <td>{{ $transaksi->pelanggan->nama_pelanggan ?? '-' }}</td>
                 <td>{{ $transaksi->mobil->nama_mobil ?? '-' }}</td>
                 <td>{{ \Carbon\Carbon::parse($transaksi->tanggal_mulai)->format('d/m/Y') }}</td>
                 <td>{{ \Carbon\Carbon::parse($transaksi->tanggal_selesai)->format('d/m/Y') }}</td>
