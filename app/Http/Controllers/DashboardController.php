@@ -30,7 +30,7 @@ class DashboardController extends Controller
             $labelBulan[] = $bulan->locale('id')->isoFormat('MMM Y');
             $dataPendapatan[] = Transaksi::whereYear('created_at', $bulan->year)
                 ->whereMonth('created_at', $bulan->month)
-                ->sum('total_biaya');
+                ->sum('total_bayar');
         }
 
         return view('dashboard', compact(
