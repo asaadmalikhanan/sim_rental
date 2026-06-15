@@ -8,34 +8,23 @@ use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/dashboard', function () {
-    $totalMobil      = \App\Models\Mobil::count();
-    $totalPelanggan  = \App\Models\Pelanggan::count();
-    $transaksiAktif  = \App\Models\Transaksi::where('status', 'aktif')->count();
-    $totalPendapatan = \App\Models\Transaksi::where('status', 'selesai')->sum('total_bayar');
-
-    return view('dashboard', compact(
-        'totalMobil',
-        'totalPelanggan',
-        'transaksiAktif',
-        'totalPendapatan'
-    ));
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
-    // Route Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Route Admin & Pimpinan (bisa akses semua tapi pimpinan hanya lihat)
     Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
     Route::get('laporan/export-pdf', [LaporanController::class, 'exportPdf'])->name('laporan.pdf');
     Route::get('laporan/export-excel', [LaporanController::class, 'exportExcel'])->name('laporan.excel');
@@ -49,7 +38,6 @@ Route::middleware('auth')->group(function () {
     Route::get('pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
     Route::get('kriteria', [KriteriaController::class, 'index'])->name('kriteria.index');
 
-    // Route khusus Admin saja
     Route::middleware('admin')->group(function () {
 
         Route::get('mobil/create', [MobilController::class, 'create'])->name('mobil.create');
