@@ -14,12 +14,29 @@
 
             <div class="bg-white shadow rounded p-4">
 
-                @if(auth()->user()->role === 'admin')
-                    <a href="{{ route('mobil.create') }}"
-                       class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4 inline-block">
-                        + Tambah Mobil
+                {{-- Tombol Tambah & Filter Merk --}}
+                <div class="flex flex-wrap gap-2 mb-4">
+                    @if(auth()->user()->role === 'admin')
+                        <a href="{{ route('mobil.create') }}"
+                           class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                            + Tambah Mobil
+                        </a>
+                    @endif
+
+                    {{-- Tombol Filter Merk --}}
+                    <a href="{{ route('mobil.index') }}"
+                       class="px-4 py-2 rounded text-sm font-medium transition
+                       {{ !request('merk') ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
+                        Semua
                     </a>
-                @endif
+                    @foreach(['Toyota','Mitsubishi','Honda','Suzuki','Daihatsu','Isuzu','Hino','Nissan','Mazda','Hyundai','Wuling'] as $merk)
+                    <a href="{{ route('mobil.index', ['merk' => $merk]) }}"
+                       class="px-4 py-2 rounded text-sm font-medium transition
+                       {{ request('merk') == $merk ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
+                        {{ $merk }}
+                    </a>
+                    @endforeach
+                </div>
 
                 <table class="table-auto w-full border mt-4 text-sm">
                     <thead>
