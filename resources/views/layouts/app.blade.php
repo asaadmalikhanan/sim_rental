@@ -72,7 +72,7 @@
                     </a>
 
                     <div x-show="sidebarOpen" class="px-4 pt-4 pb-2">
-                        <p style="font-size:10px; font-weight:600; color:rgba(255,255,255,0.3); letter-spacing:0.08em; text-transform:uppercase;">SAW & Laporan</p>
+                        <p style="font-size:10px; font-weight:600; color:rgba(255,255,255,0.3); letter-spacing:0.08em; text-transform:uppercase;">Rekomendasi & Laporan</p>
                     </div>
 
                     <a href="/kriteria"
