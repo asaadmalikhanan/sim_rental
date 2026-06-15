@@ -114,7 +114,7 @@
                         <tr class="text-center hover:bg-gray-50">
                             <td class="border p-2">{{ $i + 1 }}</td>
                             <td class="border p-2">{{ $transaksi->kode_transaksi }}</td>
-                            <td class="border p-2">{{ $transaksi->pelanggan->nama ?? '-' }}</td>
+                            <td class="border p-2">{{ $transaksi->pelanggan->nama_pelanggan ?? '-' }}</td>
                             <td class="border p-2">{{ $transaksi->mobil->nama_mobil ?? '-' }}</td>
                             <td class="border p-2">{{ $transaksi->tanggal_mulai }}</td>
                             <td class="border p-2">{{ $transaksi->tanggal_selesai }}</td>
