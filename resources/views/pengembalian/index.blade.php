@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Data Pengembalian</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Pengembalian Mobil</h2>
     </x-slot>
 
     <div class="py-6">
@@ -14,12 +14,7 @@
 
             <div class="bg-white shadow rounded p-4">
 
-                @if(auth()->user()->role === 'admin')
-                    <a href="/pengembalian/create"
-                       class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">
-                        + Tambah Pengembalian
-                    </a>
-                @endif
+                <p class="text-sm text-gray-500 mb-4">Daftar transaksi yang masih aktif dan belum dikembalikan.</p>
 
                 <table class="table-auto w-full border mt-4 text-sm">
                     <thead>
@@ -28,73 +23,43 @@
                             <th class="border p-2">Kode Transaksi</th>
                             <th class="border p-2">Pelanggan</th>
                             <th class="border p-2">Mobil</th>
-                            <th class="border p-2">Tgl Kembali</th>
-                            <th class="border p-2">Keterlambatan</th>
-                            <th class="border p-2">Denda</th>
+                            <th class="border p-2">Tgl Mulai</th>
+                            <th class="border p-2">Tgl Selesai</th>
                             <th class="border p-2">Total Bayar</th>
-                            <th class="border p-2">Kondisi</th>
-                            <th class="border p-2">Aksi</th>
+                            @if(auth()->user()->role === 'admin')
+                                <th class="border p-2">Aksi</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($pengembalians as $i => $pengembalian)
+                        @forelse($transaksis as $i => $transaksi)
                         <tr class="text-center hover:bg-gray-50">
-                            <td class="border p-2">{{ $pengembalians->firstItem() + $i }}</td>
-                            <td class="border p-2">{{ $pengembalian->transaksi->kode_transaksi }}</td>
-                            <td class="border p-2">{{ $pengembalian->transaksi->pelanggan->nama_pelanggan }}</td>
-                            <td class="border p-2">{{ $pengembalian->transaksi->mobil->nama_mobil }}</td>
-                            <td class="border p-2">{{ $pengembalian->tanggal_kembali }}</td>
+                            <td class="border p-2">{{ $transaksis->firstItem() + $i }}</td>
+                            <td class="border p-2">{{ $transaksi->kode_transaksi }}</td>
+                            <td class="border p-2">{{ $transaksi->pelanggan->nama_pelanggan ?? '-' }}</td>
+                            <td class="border p-2">{{ $transaksi->mobil->nama_mobil ?? '-' }}</td>
+                            <td class="border p-2">{{ $transaksi->tanggal_mulai }}</td>
+                            <td class="border p-2">{{ $transaksi->tanggal_selesai }}</td>
+                            <td class="border p-2">Rp {{ number_format($transaksi->total_bayar, 0, ',', '.') }}</td>
+                            @if(auth()->user()->role === 'admin')
                             <td class="border p-2">
-                                @if($pengembalian->keterlambatan > 0)
-                                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs">
-                                        {{ $pengembalian->keterlambatan }} hari
-                                    </span>
-                                @else
-                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">
-                                        Tepat Waktu
-                                    </span>
-                                @endif
+                                <a href="{{ route('pengembalian.create', ['transaksi_id' => $transaksi->id]) }}"
+                                   class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs">
+                                    🔄 Kembalikan
+                                </a>
                             </td>
-                            <td class="border p-2">Rp {{ number_format($pengembalian->denda, 0, ',', '.') }}</td>
-                            <td class="border p-2">Rp {{ number_format($pengembalian->total_bayar, 0, ',', '.') }}</td>
-                            <td class="border p-2">
-                                @if($pengembalian->kondisi_mobil == 'baik')
-                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Baik</span>
-                                @elseif($pengembalian->kondisi_mobil == 'rusak_ringan')
-                                    <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">Rusak Ringan</span>
-                                @else
-                                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs">Rusak Berat</span>
-                                @endif
-                            </td>
-                            <td class="border p-2">
-                                {{-- Tombol Detail bisa dilihat semua role --}}
-                                <a href="/pengembalian/{{ $pengembalian->id }}"
-                                   class="bg-blue-400 text-white px-3 py-1 rounded text-xs">Detail</a>
-
-                                {{-- Tombol Hapus hanya Admin --}}
-                                @if(auth()->user()->role === 'admin')
-                                    <form action="/pengembalian/{{ $pengembalian->id }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                                onclick="return confirm('Yakin hapus data ini?')"
-                                                class="bg-red-500 text-white px-3 py-1 rounded text-xs">
-                                            Hapus
-                                        </button>
-                                    </form>
-                                @endif
-                            </td>
+                            @endif
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="10" class="text-center p-4 text-gray-500">Belum ada data pengembalian.</td>
+                            <td colspan="8" class="text-center p-4 text-gray-500">Tidak ada transaksi aktif yang menunggu pengembalian.</td>
                         </tr>
                         @endforelse
                     </tbody>
                 </table>
 
                 <div class="mt-4">
-                    {{ $pengembalians->links() }}
+                    {{ $transaksis->links() }}
                 </div>
 
             </div>
