@@ -45,7 +45,7 @@
                             <td class="border p-2">
                                 <a href="{{ route('pengembalian.create', ['transaksi_id' => $transaksi->id]) }}"
                                    class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs">
-                                    🔄 Kembalikan
+                                    Dikembalikan
                                 </a>
                             </td>
                             @endif
