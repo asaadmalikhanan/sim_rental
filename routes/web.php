@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('mobil', [MobilController::class, 'index'])->name('mobil.index');
     Route::get('pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
     Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
+    Route::get('transaksi/{transaksi}', [TransaksiController::class, 'show'])->name('transaksi.show');
     Route::get('pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
     Route::get('kriteria', [KriteriaController::class, 'index'])->name('kriteria.index');
 
