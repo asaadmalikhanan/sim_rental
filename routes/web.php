@@ -35,7 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::get('mobil', [MobilController::class, 'index'])->name('mobil.index');
     Route::get('pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
     Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
-    Route::get('transaksi/{transaksi}', [TransaksiController::class, 'show'])->name('transaksi.show');
     Route::get('pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
     Route::get('kriteria', [KriteriaController::class, 'index'])->name('kriteria.index');
 
@@ -58,7 +57,8 @@ Route::middleware('auth')->group(function () {
         Route::get('transaksi/{transaksi}/edit', [TransaksiController::class, 'edit'])->name('transaksi.edit');
         Route::put('transaksi/{transaksi}', [TransaksiController::class, 'update'])->name('transaksi.update');
         Route::delete('transaksi/{transaksi}', [TransaksiController::class, 'destroy'])->name('transaksi.destroy');
-
+        Route::get('transaksi/{transaksi}', [TransaksiController::class, 'show'])->name('transaksi.show');
+        
         Route::get('pengembalian/create', [PengembalianController::class, 'create'])->name('pengembalian.create');
         Route::post('pengembalian', [PengembalianController::class, 'store'])->name('pengembalian.store');
         Route::get('pengembalian/{pengembalian}/edit', [PengembalianController::class, 'edit'])->name('pengembalian.edit');
