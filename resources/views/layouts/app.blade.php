@@ -14,9 +14,9 @@
         <div class="flex min-h-screen" x-data="{ sidebarOpen: true }">
 
             <!-- Sidebar -->
-            <aside :class="sidebarOpen ? 'w-64' : 'w-16'"
-                   class="sidebar sidebar-transition min-h-screen flex flex-col flex-shrink-0"
-                   style="transition: width 0.3s ease;">
+<aside :class="sidebarOpen ? 'w-64' : 'w-16'"
+       class="sidebar sidebar-transition flex flex-col flex-shrink-0"
+       style="transition: width 0.3s ease; height: 100vh; position: sticky; top: 0; overflow-y: auto;">
 
                 <!-- Logo -->
                 <div class="sidebar-header flex items-center gap-3 px-4 py-4">
